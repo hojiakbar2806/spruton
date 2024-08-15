@@ -1,0 +1,55 @@
+.tasks-section {
+  padding: 30px 0 0 0;
+  .text {
+    padding-bottom: 48px;
+  }
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 13px 17px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 20px;
+    svg path {
+      fill: #00000080;
+    }
+    &.completed {
+      background: #d53e76;
+      color: #fff;
+      cursor: default;
+      path {
+        fill: #fff;
+      }
+
+      span {
+        color: #fff;
+      }
+    }
+
+    &.block {
+      color: #000;
+      cursor: default;
+      path {
+        fill: #000;
+      }
+    }
+
+    span {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 16.94px;
+      text-align: left;
+      max-width: 200px;
+      color: #171717;
+    }
+    .right-img {
+      margin-left: auto;
+    }
+  }
+}

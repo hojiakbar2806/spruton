@@ -1,0 +1,271 @@
+// header
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  font-family: "SF Pro", sans-serif;
+
+  .prev-btn {
+    padding: 11px 8px;
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: -0.4000000059604645px;
+    color: #1a4265;
+    gap: 3px;
+
+    .pi {
+      font-size: 22px;
+    }
+  }
+
+  .company-logo {
+    text-align: center;
+  }
+
+  .company-name {
+    font-size: 17px;
+    font-weight: 590;
+    line-height: 22px;
+    letter-spacing: -0.4000000059604645px;
+    display: block;
+    margin-bottom: 1px;
+  }
+
+  .company-status {
+    font-family: "Roboto", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.10000000149011612px;
+    color: #707579;
+  }
+
+  .ellipsis-btn {
+    width: 85px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-right: 20px;
+  }
+}
+
+// footer
+footer {
+  padding: 7px 0 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  margin-top: 38px;
+  background: #ffffffbf;
+  backdrop-filter: blur(10px);
+  box-shadow: 0px -0.33px 0px 0px #0000004d;
+
+  .box {
+    text-align: center;
+    width: 48px;
+
+    &:last-child {
+      width: 58px;
+    }
+
+    &.active {
+      span {
+        color: #1a4265;
+      }
+
+      svg path {
+        fill: #1a4265;
+      }
+    }
+
+    span {
+      display: block;
+      margin-top: 4px;
+      font-family: "SF Pro", sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      line-height: 11.93px;
+      text-align: center;
+      color: #999999;
+    }
+  }
+}
+
+// take gift modal
+.overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 19;
+  display: none;
+
+  &.show {
+    display: block;
+  }
+}
+
+.modal {
+  position: fixed;
+  height: 98vh;
+  border-radius: 20px 20px 0 0;
+  background: #f0f2f4;
+  z-index: 20;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  transform: scaleY(0);
+  transition: all 0.2s linear;
+  transform-origin: bottom;
+  overflow: hidden;
+
+  &.show {
+    transform: scaleY(1);
+  }
+}
+
+.take-gift__modal {
+  .modal-content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -56px;
+  }
+}
+
+// not-found
+.not-found {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 16px 16px 75px 16px;
+
+  h1 {
+    font-size: 50px;
+    font-weight: 900;
+    line-height: 60.51px;
+    color: #d53e76;
+    margin-bottom: 18px;
+  }
+
+  button {
+    margin-top: auto;
+  }
+
+  .content-box {
+    margin-top: auto;
+  }
+}
+
+// custom select
+.custom-select {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  background: #0000003e;
+  height: 100%;
+  z-index: 20;
+  transition: all 0.3s;
+
+  &.show {
+    bottom: 0;
+  }
+
+  div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    padding: 10px;
+
+    ul {
+      width: 100%;
+      background: #fff;
+      border-radius: 14px;
+
+      li {
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 22px;
+        cursor: pointer;
+        letter-spacing: -0.4300000071525574px;
+        text-align: center;
+        color: #1a4265;
+        border-bottom: 0.33px solid #3c3c435c;
+        padding: 17px;
+        transition: all 0.3s;
+
+        &:last-child {
+          border: none;
+        }
+
+        &:hover {
+          background: #0000001a;
+        }
+      }
+    }
+
+    .cencle-btn {
+      width: 100%;
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 22px;
+      letter-spacing: -0.4300000071525574px;
+      text-align: center;
+      height: 56px;
+      color: #d53e76;
+      background: #fff;
+      border-radius: 14px;
+    }
+  }
+}
+
+// <!-- Loading -->
+
+.loader {
+  display: none;
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loader.show {
+  display: block !important;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

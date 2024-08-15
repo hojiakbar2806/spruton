@@ -1,0 +1,204 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url(./normalize.css);
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+textarea:focus,
+select:focus {
+  outline: none !important;
+  -webkit-appearance: none;
+  box-shadow: none !important;
+}
+
+button {
+  border: none;
+  background: none;
+}
+
+input:focus {
+  outline: none !important;
+}
+
+a:active,
+a:focus {
+  outline: 0;
+  -moz-outline-style: none;
+}
+
+.wrapper {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+body {
+  background: #efeff3;
+  font-family: "Inter", sans-serif;
+  font-weight: normal;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  padding: 0;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+.container {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.p-button-help {
+  padding: 14px;
+  width: 100%;
+  background: #d53e76;
+  border-radius: 16px;
+}
+
+.text {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: center;
+  display: block;
+}
+
+.connect-wallet__btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: #1A4265;
+  height: 32px;
+  padding: 5px 13px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+  text-align: center;
+  color: #fff;
+  border-radius: 17px;
+  width: fit-content;
+}
+
+/* avatar-box */
+.avatar {
+  width: 40px;
+  height: 40px;
+}
+
+.avatar-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 24px;
+}
+
+.avatar-box .user-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar-box .user-name {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 22.17px;
+  color: #0E2539;
+  display: block;
+}
+
+.avatar-box .user-id {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20.15px;
+  color: #6D7882;
+}
+
+/* tab menu */
+.p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link {
+  padding: 12px 0;
+  color: #8E8E92;
+  font-family: 'SF Pro', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.052400000393390656px;
+  border: none;
+  position: relative;
+  background: transparent;
+}
+
+.p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: transparent;
+  border-radius: 5px 5px 0 0;
+}
+
+.p-tabmenu-nav {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  border: none;
+  background: transparent;
+}
+
+.p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link {
+  color: #000000;
+}
+
+.p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link::before {
+  background: #D53E76;
+}
+
+.wallet__btn button {
+  height: 32px;
+  width: 160px;
+  background: #1a4265;
+  white-space: nowrap;
+}
