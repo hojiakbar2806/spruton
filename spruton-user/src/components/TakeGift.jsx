@@ -1,11 +1,17 @@
 import React from "react";
 import assets from "../assets";
 import { useDispatch, useSelector } from "react-redux";
-import { openConnectBox } from "../context/slice/openSlice";
+import { openConnectBox, openEmptyBox } from "../context/slice/openSlice";
 
 export const TakeGift = () => {
-  const showModal = useSelector((state) => state.open.giftBox);
+  const showModal = useSelector((state) => state.open.loadBox);
+  const loot = useSelector((state) => state.open.loot);
   const dispatch = useDispatch();
+
+  const giftFunction = () => {
+    if (loot) dispatch(openConnectBox());
+    else dispatch(openEmptyBox());
+  };
   return (
     <>
       <div className={`overlay ${showModal ? "show" : ""}`}></div>
@@ -15,7 +21,7 @@ export const TakeGift = () => {
             <video
               src={assets.takeGiftVideo}
               autoPlay={true}
-              onEnded={() => dispatch(openConnectBox())}
+              onEnded={() => giftFunction()}
               playsInline
               muted
             ></video>

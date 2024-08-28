@@ -9,6 +9,7 @@ import { CreateBox } from "./CreateBox";
 import { Footer } from "../../components";
 
 export const AddBox = () => {
+  
   const [selectWeek, setSelectWeek] = useState(false);
   const [selectedOption, setSelectedOption] = useState("DAY");
   const [addedBox, setAddedBox] = useState(false);

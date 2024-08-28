@@ -1,6 +1,6 @@
 import { apiSlice } from "./api.service";
 
-export const userService = apiSlice.injectEndpoints({
+export const gift_serviceService = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // Get my state - GET: /me
     getMe: builder.query({
@@ -8,7 +8,7 @@ export const userService = apiSlice.injectEndpoints({
         url: "/get/me",
         method: "GET",
       }),
-      providesTags: ["me"],
+      providesTags: ["gift_service"],
     }),
 
     // Get static lang - GET: /static/lang/{lang}
@@ -17,22 +17,40 @@ export const userService = apiSlice.injectEndpoints({
         url: "/my/task",
         method: "GET",
       }),
+      providesTags: ["gift_service"],
     }),
 
     // Get perform task - GET: /perform/task/29e098
     getPerformTask: builder.query({
-      query: (taskId) => ({
-        url: `perform/task/${taskId}`,
+      query: (id) => ({
+        url: "/perform/task/" + id,
         method: "GET",
       }),
+      providesTags: ["gift_service"],
     }),
+
+    checkTask: builder.mutation({
+      query: (id) => ({
+        url: "/check/task/" + id,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["gift_service"],
+    }),
+
     setWallet: builder.mutation({
       query: (body) => ({
         url: "/set/wallet",
         method: "PATCH",
-        body,
+        body: body,
       }),
-      invalidatesTags: ["user"],
+      invalidatesTags: ["gift_service"],
+    }),
+    openBox: builder.mutation({
+      query: () => ({
+        url: "/open/box",
+        method: "PATCH",
+      }),
+      providesTags: ["gift_service"],
     }),
   }),
 });
@@ -40,6 +58,8 @@ export const userService = apiSlice.injectEndpoints({
 export const {
   useGetMeQuery,
   useGetMyTaskQuery,
-  useGetPerformTaskQuery,
   useSetWalletMutation,
-} = userService;
+  useGetPerformTaskQuery,
+  useCheckTaskMutation,
+  useOpenBoxMutation,
+} = gift_serviceService;

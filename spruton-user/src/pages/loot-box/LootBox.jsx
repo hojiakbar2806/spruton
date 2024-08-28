@@ -10,22 +10,20 @@ import {
 import "./loot-box.scss";
 import { Button } from "primereact/button";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  openConnectBox,
-  openConnectedBox,
-  openGiftBox,
-} from "../../context/slice/openSlice";
-import { Avatar } from "primereact/avatar";
+import { useDispatch } from "react-redux";
+import { loot, openLoadBox } from "../../context/slice/openSlice";
+import { useOpenBoxMutation } from "../../context/service/user.service";
 
 export const LootBox = () => {
+  const [openBox] = useOpenBoxMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const openGift = () => {
-    dispatch(openGiftBox());
+  const openGift = async () => {
+    dispatch(openLoadBox());
+    const res = await openBox();
+    dispatch(loot(res.data.innerData.drop || null));
   };
-
   return (
     <>
       <div className="loot-box container">

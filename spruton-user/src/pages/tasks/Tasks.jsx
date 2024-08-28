@@ -1,11 +1,108 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./tasks.scss";
 import assets from "../../assets";
 import { Footer } from "../../components";
-import { useGetMyTaskQuery } from "../../context/service/user.service";
+import {
+  useCheckTaskMutation,
+  useGetMyTaskQuery,
+  useGetPerformTaskQuery,
+} from "../../context/service/user.service";
 
 export const Tasks = () => {
-  const { data = null } = useGetMyTaskQuery();
+  const { data, refetch } = useGetMyTaskQuery({
+    pollingInterval: 1000,
+  });
+  const [check] = useCheckTaskMutation();
+
+  const [id, setId] = useState(localStorage.getItem("taskId") || null);
+  const [whenDone, setWhenDone] = useState(null);
+  const [intervalId, setIntervalId] = useState(null);
+  const [activeTaskId, setActiveTaskId] = useState(0);
+
+  useEffect(() => {
+    if (data) {
+      const firstIncompleteTask = data.innerData.quest.find(
+        (item) => item.status !== "completed"
+      );
+
+      if (firstIncompleteTask) {
+        setActiveTaskId(firstIncompleteTask.id);
+      }
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (id && data) {
+      const validItem = data.innerData.quest.some((item) => item.id === id);
+      if (!validItem) {
+        localStorage.removeItem("taskId");
+        setId(null);
+      }
+    }
+  }, [data, id]);
+
+  useGetPerformTaskQuery(id, { skip: !id });
+
+  useEffect(() => {
+    if (!id) return;
+
+    const startTimer = async () => {
+      try {
+        const res = await check(id);
+        const remainingTime = res?.data?.innerData?.remaining_time;
+
+        if (remainingTime === undefined) {
+          localStorage.removeItem("taskId");
+          setWhenDone(null);
+          setId(null);
+          refetch();
+          return;
+        }
+
+        let [m, s] = remainingTime.split(":").map(Number);
+        let totalSeconds = m * 60 + s;
+
+        const interval = setInterval(() => {
+          if (totalSeconds <= 0) {
+            clearInterval(interval);
+            setWhenDone("");
+            refetch();
+            localStorage.removeItem("taskId");
+            return;
+          }
+          totalSeconds--;
+          updateTimer(totalSeconds);
+        }, 1000);
+
+        setIntervalId(interval);
+      } catch (error) {
+        console.error("Failed to fetch task status:", error);
+      }
+    };
+
+    startTimer();
+
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [id, check, refetch]);
+
+  const updateTimer = (seconds) => {
+    const minutes = String(Math.floor(seconds / 60)).padStart(2, "0");
+    const remainingSeconds = String(seconds % 60).padStart(2, "0");
+    setWhenDone(`${minutes}:${remainingSeconds}`);
+  };
+
+  const performTask = (item) => {
+    if (item.channel_link) {
+      window.open(item.channel_link, "_blank");
+    }
+    if (item.status !== "completed") {
+      localStorage.setItem("taskId", item.id);
+      setId(item.id);
+    }
+  };
+
   return (
     <>
       <div className="tasks-section">
@@ -15,25 +112,36 @@ export const Tasks = () => {
           </span>
           <div className="cards">
             {data?.innerData?.quest?.map((item, index) => {
-              const completed = item.status === "completed";
-              const active = item.status === "active";
-              const disabled = item.status === "disabled";
+              let activeTask, completed, block;
+              completed = item.status === "completed";
+              activeTask = activeTaskId === item.id;
+              block = !activeTask && !completed;
               return (
-                <a
-                  href={item.channel_link}
-                  className={completed ? "card completed" : "card"}
+                <div
+                  onClick={() => (block ? null : performTask(item))}
+                  target="blank"
+                  className={`card ${completed ? "completed" : ""} ${
+                    block ? "block" : ""
+                  } `}
                   key={index}
                 >
                   {StarSvg}
                   <span>
                     {index + 1}. {item.name}
                   </span>
-                  <img
-                    className="right-img"
-                    src={completed ? assets.check : assets.next}
-                    alt=""
-                  />
-                </a>
+                  {id === item.id && <span>{whenDone}</span>}
+                  {block ? (
+                    BlockSvg
+                  ) : (
+                    <img
+                      className="right-img"
+                      src={
+                        item.status === "completed" ? assets.check : assets.next
+                      }
+                      alt="icon"
+                    />
+                  )}
+                </div>
               );
             })}
           </div>

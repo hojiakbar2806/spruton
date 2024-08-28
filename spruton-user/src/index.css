@@ -60,6 +60,13 @@ a:focus {
   -moz-outline-style: none;
 }
 
+a.disabled {
+  pointer-events: none; /* Prevent clicks */
+  color: gray; /* Change text color */
+  text-decoration: none; /* Remove underline */
+  cursor: default; /* Change cursor to default */
+}
+
 .wrapper {
   overflow: hidden;
   display: flex;
@@ -109,7 +116,7 @@ button {
   display: flex;
   align-items: center;
   gap: 7px;
-  background: #1A4265;
+  background: #1a4265;
   height: 32px;
   padding: 5px 13px;
   font-size: 16px;
@@ -144,7 +151,7 @@ button {
   font-size: 17px;
   font-weight: 500;
   line-height: 22.17px;
-  color: #0E2539;
+  color: #0e2539;
   display: block;
 }
 
@@ -152,14 +159,14 @@ button {
   font-size: 15px;
   font-weight: 400;
   line-height: 20.15px;
-  color: #6D7882;
+  color: #6d7882;
 }
 
 /* tab menu */
 .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link {
   padding: 12px 0;
-  color: #8E8E92;
-  font-family: 'SF Pro', sans-serif;
+  color: #8e8e92;
+  font-family: "SF Pro", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
@@ -193,7 +200,7 @@ button {
 }
 
 .p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link::before {
-  background: #D53E76;
+  background: #d53e76;
 }
 
 .wallet__btn button {

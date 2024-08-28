@@ -8,6 +8,7 @@ import { closeBox, openConnectedBox } from "../../context/slice/openSlice";
 
 export const ConnectWallet = () => {
   const showModal = useSelector((state) => state.open.connectBox);
+  const loot = useSelector((state) => state.open.loot);
   const dispatch = useDispatch();
   return (
     <>
@@ -29,7 +30,7 @@ export const ConnectWallet = () => {
             <img src={assets.priz} alt="" />
           </div>
           <h3>You unlocked</h3>
-          <h1>25</h1>
+          <h1>{loot}</h1>
           <span className="text">Jettons</span>
         </div>
         <Button
