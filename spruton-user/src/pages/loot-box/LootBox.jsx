@@ -11,10 +11,14 @@ import { Button } from "primereact/button";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loot, openLoadBox } from "../../context/slice/openSlice";
-import { useOpenBoxMutation } from "../../context/service/user.service";
+import {
+  useGetBoxesQuery,
+  useOpenBoxMutation,
+} from "../../context/service/user.service";
 
 export const LootBox = () => {
   const [openBox] = useOpenBoxMutation();
+  const { data } = useGetBoxesQuery();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,13 +27,17 @@ export const LootBox = () => {
     const res = await openBox();
     dispatch(loot(res.data.innerData.drop || null));
   };
+
+  console.log(data);
   return (
     <>
       <div className="loot-box container">
         <div>
           <div>
             <span className="content-text">Remained</span>
-            <span className="content-text">1 912 000 / 2 000 000</span>
+            <span className="content-text">
+              {data?.innerData.remaining_boxes} / {data?.innerData.total_boxes}
+            </span>
           </div>
           <div className="gift-box" onClick={openGift}>
             <img className="gift-box__img" src={assets.giftBox} alt="" />

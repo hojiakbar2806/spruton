@@ -52,6 +52,13 @@ export const gift_serviceService = apiSlice.injectEndpoints({
       }),
       providesTags: ["gift_service"],
     }),
+    getBoxes: builder.query({
+      query: () => ({
+        url: "/get/boxes",
+        method: "GET",
+      }),
+      providesTags: ["gift_service"],
+    }),
   }),
 });
 
@@ -60,6 +67,7 @@ export const {
   useGetMyTaskQuery,
   useSetWalletMutation,
   useGetPerformTaskQuery,
+  useGetBoxesQuery,
   useCheckTaskMutation,
   useOpenBoxMutation,
 } = gift_serviceService;
